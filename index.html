@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #gift-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: #ff69b4;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        #gift-box:hover {
+            transform: scale(1.1);
+        }
+
+        #gift-box::before, #gift-box::after {
+            content: '';
+            position: absolute;
+            background-color: #fff;
+        }
+
+        #gift-box::before {
+            width: 25px;
+            height: 200px;
+        }
+
+        #gift-box::after {
+            width: 200px;
+            height: 25px;
+        }
+
+        #rose {
+            display: none;
+            margin-top: -30px;
+            width: 120px;
+            animation: fadeIn 1s ease;
+        }
+
+        #message {
+            display: none;
+            position: absolute;
+            top: 60%;
+            font-size: 2rem;
+            color: #ff1493;
+            text-align: center;
+            font-weight: bold;
+            animation: fadeIn 1s ease;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            opacity: 0.8;
+            animation: fall 2s ease-in-out infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gift-box" onclick="openGift()">
+        🎁
+    </div>
+    <img id="rose" src="images/images-removebg-preview.png" alt="Rose">
+    <div id="message"><br> eres todo lo que quiero</br></div>
+
+    <script>
+        function openGift() {
+            const giftBox = document.getElementById('gift-box');
+            const rose = document.getElementById('rose');
+            const message = document.getElementById('message');
+
+            giftBox.style.display = 'none';
+            rose.style.display = 'block';
+            message.style.display = 'block';
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDelay = `${Math.random()}s`;
+                confetti.style.animationDuration = `${1 + Math.random()}s`;
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
